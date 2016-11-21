@@ -1,3 +1,9 @@
+senia-cdd (0.8) xenial; urgency=medium
+
+  * Updated with firstboot
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Mon, 21 Nov 2016 12:54:30 +0100
+
 senia-cdd (0.7) xenial; urgency=medium
 
   * Updated with new names
