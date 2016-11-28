@@ -1,0 +1,24 @@
+#!/bin/bash
+
+
+TMPDIR="$(mktemp -d /tmp/senia.XXXXX)"
+echo "Working with: $TMPDIR"
+NUMERO="0"
+for line in $(cat enlaces.txt); do
+	NUMERO=$(echo $NUMERO+1|bc)
+	echo $NUMERO
+	echo $line 
+	export DISPLAY=:0.0
+	gnome-web-photo $line $TMPDIR/$NUMERO.png
+	#ffmpeg -f lavfi -i color=s=1440x900:d=10 -loop 1 -i $TMPDIR/$NUMERO.png  -filter_complex "[1:v]scale=-2:1440[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mkv
+	
+	ffmpeg -f lavfi -i color=s=1440x900:d=100 -loop 1 -i $TMPDIR/$NUMERO.png  -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mp4
+	
+	
+	# CASI VA
+	#ffmpeg -f lavfi -i color=s=1440x900:d=10 -loop 1 -i $TMPDIR/$NUMERO.png  -filter_complex "[0:v]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mkv
+done
+
+
+
+exit 0
