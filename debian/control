@@ -26,7 +26,7 @@ Description: Senia-cdd settings for browsers
 
 Package: senia-cdd
 Architecture: all
-Depends: ${misc:Depends},senia-backgrounds, senia-session-cleaner-for-mate, senia-browsers-settings
+Depends: ${misc:Depends},senia-backgrounds, senia-session-cleaner-for-mate, senia-browsers-settings, senia-firstboot
 Description: IES La Senia CDD
  All the stuff
 
