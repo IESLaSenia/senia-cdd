@@ -1,4 +1,4 @@
-senia-cdd (0.9.2) xenial; urgency=medium
+senia-cdd (0.9.3) xenial; urgency=high
 
   * Updated senia-firstboot with set-repos
 
