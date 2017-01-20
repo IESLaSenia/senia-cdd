@@ -1,3 +1,9 @@
+senia-cdd (0.9.5) xenial; urgency=high
+
+  * New default page for browsers
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Fri, 20 Jan 2017 09:34:10 +0100
+
 senia-cdd (0.9.4) xenial; urgency=high
 
   * Updated senia-firstboot with set-repos
