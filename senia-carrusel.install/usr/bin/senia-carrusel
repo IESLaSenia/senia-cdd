@@ -1,24 +1,75 @@
 #!/bin/bash
+# Usefull script to create videos from 
+#  - webpage links
+#  - photo's folder #WiP
+#  - pdf's folder #TODO
+#  - presentation folder #TODO
+
+# Some usefull variables
+TMPDIR="/tmp/senia-carrusel.default"
+NUMERO=0
+
+#
+# Die method
+#
+die(){
+	echo " * [ ERROR ] : $1"
+	exit 1
+}
+
+#
+# Prepare environment function
+#
+prepare_environment(){
+	TMPDIR="$(mktemp -d /tmp/senia.XXXXX)"
+	echo "Working with: $TMPDIR"
+}
 
 
-TMPDIR="$(mktemp -d /tmp/senia.XXXXX)"
-echo "Working with: $TMPDIR"
+cleaning_environment(){
+	echo " * [ Cleaning ] : $TMPDIR is removed"
+}
+
+#
+# Usefull sanity checks
+#
+sanity_checks(){
+	test -d ./carrusel-workspace || die " Carrusel Workspace folder not found, please execute with : --prepare"
+	test -f ./carrusel-workspace/enlaces.txt || die " fichero enlaces.txt no existe" 
+}
+
+create_workspace(){
+	mkdir ./carrusel-workspace 
+	touch ./carrusel-workspace/enlaces.txt
+	mkdir ./carrusel-workspace/photos/
+	mkdir ./carrusel-workspace/pdfs/	
+	mkdir ./carrusel-workspace/docs/	
+}
+
+
+#
+# MAIN 
+
+if [ $1 = "--prepare" ]; then 
+
+sanity_checks
+prepare_environment
+
+
+# Procesando los enlaces en primer lugar
+#
 NUMERO="0"
-for line in $(cat enlaces.txt); do
+for line in $(cat ./carrusel-workspace/enlaces.txt); do
 	NUMERO=$(echo $NUMERO+1|bc)
-	echo $NUMERO
-	echo $line 
 	export DISPLAY=:0.0
 	gnome-web-photo $line $TMPDIR/$NUMERO.png
 	#ffmpeg -f lavfi -i color=s=1440x900:d=10 -loop 1 -i $TMPDIR/$NUMERO.png  -filter_complex "[1:v]scale=-2:1440[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mkv
 	
 	ffmpeg -f lavfi -i color=s=1440x900:d=100 -loop 1 -i $TMPDIR/$NUMERO.png  -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mp4
-	
-	
-	# CASI VA
-	#ffmpeg -f lavfi -i color=s=1440x900:d=10 -loop 1 -i $TMPDIR/$NUMERO.png  -filter_complex "[0:v]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mkv
 done
 
 
+
+cleaning_environment
 
 exit 0
