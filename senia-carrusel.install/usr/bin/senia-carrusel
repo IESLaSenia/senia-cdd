@@ -52,6 +52,7 @@ create_workspace(){
 
 if [ "$1" = "--prepare" ] ; then 
 	create_workspace
+	exit 0
 fi
 
 sanity_checks
