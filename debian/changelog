@@ -1,3 +1,9 @@
+senia-cdd (0.9.5.1) xenial; urgency=high
+
+  * Testing carrusel
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Fri, 27 Jan 2017 10:29:08 +0100
+
 senia-cdd (0.9.5) xenial; urgency=high
 
   * New default page for browsers
