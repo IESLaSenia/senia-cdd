@@ -50,7 +50,9 @@ create_workspace(){
 #
 # MAIN 
 
-if [ $1 = "--prepare" ]; then 
+if [ "$1" = "--prepare" ] ; then 
+	create_workspace
+fi
 
 sanity_checks
 prepare_environment
@@ -69,6 +71,30 @@ for line in $(cat ./carrusel-workspace/enlaces.txt); do
 done
 
 
+#
+# Procesamos las fotos
+echo " * [ Photos ] : Working with photos"
+for photo in $(ls -1 ./carrusel-workspace/photos/); do
+	NUMERO=$(echo $NUMERO+1|bc)
+	ffmpeg -f lavfi -i color=s=1440x900:d=100 -loop 1 -i ./carrusel-workspace/photos/$photo -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mp4
+
+done
+
+
+#
+# Procesamos los pdfs
+echo " * [ PDFS ] : Working with pdfs"
+
+for pdf in $(ls -1 ./carrusel-workspace/pdfs/); do
+	convert ./carrusel-workspace/pdfs/$pdf ./carrusel-workspace/pdfs/$pdf.png
+	for png in $(ls -1 ./carrusel-workspace/pdfs/$pdf*.png); do
+		NUMERO=$(echo $NUMERO+1|bc)
+		ffmpeg -f lavfi -i color=s=1440x900:d=100 -loop 1 -i $png -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mp4
+		rm $png
+	done
+	
+
+done
 
 cleaning_environment
 
