@@ -3,11 +3,9 @@
 # List of IPs is a simple way to made 
 # streaming for a single machine.
 LIST_OF_IPS="127.0.0.1"
-CURRENT_IP="127.0.0.1"
 
-FILES="/home/aberlanas/Vídeos/ALaCarrera/ALaCarrera_S02EP04_Sahara.mp4"
 
 # CAMBIAR IP AQUI
-cvlc -vvv $FILES --sout '#standard{access=http,mux=ogg,dst=127.0.0.1:8080}'
+vlc http://127.0.0.1:8080
 
 exit 0
