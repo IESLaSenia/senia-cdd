@@ -23,12 +23,20 @@ die(){
 #
 prepare_environment(){
 	TMPDIR="$(mktemp -d /tmp/senia.XXXXX)"
-	echo "Working with: $TMPDIR"
+	echo " * [ Starting ]: Working with: $TMPDIR"
 }
 
 
 cleaning_environment(){
+	DEST=$(date +%F_%H_%m_%S)
+        DEST=$(echo $WORKSPACE/"videos-$DEST")
+	mkdir -p $DEST
+	#TODO comprobar que el directorio no esta vacio
+	# antes de mover  el contenido
+	find $TMPDIR -name "*.mp4" -exec mv {} $DEST \;
 	echo " * [ Cleaning ] : $TMPDIR is removed"
+	zenity --notification --text="Tarea finalizada en $DEST"
+	
 }
 
 #
@@ -63,7 +71,7 @@ prepare_environment
 # Procesando los enlaces en primer lugar
 #
 NUMERO="0"
-if [ test -z "$WORKSPACE/enlaces.txt"); then
+if [ -z "$WORKSPACE/enlaces.txt" ] ; then
 	die "Fichero vacio"
 
 fi
@@ -90,7 +98,24 @@ done
 
 #
 # Procesamos los pdfs
-echo " * [ PDFS ] : Working with pdfs"
+echo " * [ DOCS ] : Working with docs"
+
+for doc in $(ls -1 $WORKSPACE/docs/); do
+	mkdir -p $WORKSPACE/docs/$doc.d/
+	soffice --headless --convert-to png $WORKSPACE/docs/$doc --outdir $WORKSPACE/docs/$doc.d/
+	#soffice --headless --convert-to png:"draw_png_export" --outdir $WORKSPACE/docs/$doc.d/ $WORKSPACE/docs/$doc 
+	for png in $(ls -1 $WORKSPACE/docs/$doc.d/*.png); do
+		NUMERO=$(echo $NUMERO+1|bc)
+		ffmpeg -f lavfi -i color=s=1440x900:d=100 -loop 1 -i $png -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mp4
+		rm $png
+	done
+	
+
+done
+
+#
+# Procesamos los PDFs
+echo " * [ PDFS ] : Working with PDFs"
 
 for pdf in $(ls -1 $WORKSPACE/pdfs/); do
 	convert $WORKSPACE/pdfs/$pdf $WORKSPACE/pdfs/$pdf.png
@@ -102,6 +127,8 @@ for pdf in $(ls -1 $WORKSPACE/pdfs/); do
 	
 
 done
+
+#soffice --headless --convert-to-png myfile.odg 
 
 cleaning_environment
 

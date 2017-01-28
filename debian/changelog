@@ -1,3 +1,12 @@
+senia-cdd (0.9.5.2) xenial; urgency=medium
+
+  * Updated version with player and server
+  * New carrusel with notification
+  * Use WORKSPACE variable to set $HOME/carrusel-worskpace
+    as default WORKSPACE instead current folder. 
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Sat, 28 Jan 2017 23:23:29 +0100
+
 senia-cdd (0.9.5.1) xenial; urgency=high
 
   * Testing carrusel
