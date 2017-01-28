@@ -7,6 +7,7 @@
 
 # Some usefull variables
 TMPDIR="/tmp/senia-carrusel.default"
+WORKSPACE="$HOME/carrusel-workspace"
 NUMERO=0
 
 #
@@ -34,16 +35,16 @@ cleaning_environment(){
 # Usefull sanity checks
 #
 sanity_checks(){
-	test -d ./carrusel-workspace || die " Carrusel Workspace folder not found, please execute with : --prepare"
-	test -f ./carrusel-workspace/enlaces.txt || die " fichero enlaces.txt no existe" 
+	test -d $WORKSPACE || die " Carrusel Workspace folder not found, please execute with : --prepare"
+	test -f $WORKSPACE/enlaces.txt || die " fichero enlaces.txt no existe" 
 }
 
 create_workspace(){
-	mkdir ./carrusel-workspace 
-	touch ./carrusel-workspace/enlaces.txt
-	mkdir ./carrusel-workspace/photos/
-	mkdir ./carrusel-workspace/pdfs/	
-	mkdir ./carrusel-workspace/docs/	
+	mkdir $WORKSPACE
+	touch $WORKSPACE/enlaces.txt
+	mkdir $WORKSPACE/photos/
+	mkdir $WORKSPACE/pdfs/	
+	mkdir $WORKSPACE/docs/	
 }
 
 
@@ -62,7 +63,12 @@ prepare_environment
 # Procesando los enlaces en primer lugar
 #
 NUMERO="0"
-for line in $(cat ./carrusel-workspace/enlaces.txt); do
+if [ test -z "$WORKSPACE/enlaces.txt"); then
+	die "Fichero vacio"
+
+fi
+
+for line in $(cat $WORKSPACE/enlaces.txt); do
 	NUMERO=$(echo $NUMERO+1|bc)
 	export DISPLAY=:0.0
 	gnome-web-photo $line $TMPDIR/$NUMERO.png
@@ -75,9 +81,9 @@ done
 #
 # Procesamos las fotos
 echo " * [ Photos ] : Working with photos"
-for photo in $(ls -1 ./carrusel-workspace/photos/); do
+for photo in $(ls -1 $WORKSPACE/photos/); do
 	NUMERO=$(echo $NUMERO+1|bc)
-	ffmpeg -f lavfi -i color=s=1440x900:d=100 -loop 1 -i ./carrusel-workspace/photos/$photo -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mp4
+	ffmpeg -f lavfi -i color=s=1440x900:d=100 -loop 1 -i $WORKSPACE/photos/$photo -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mp4
 
 done
 
@@ -86,9 +92,9 @@ done
 # Procesamos los pdfs
 echo " * [ PDFS ] : Working with pdfs"
 
-for pdf in $(ls -1 ./carrusel-workspace/pdfs/); do
-	convert ./carrusel-workspace/pdfs/$pdf ./carrusel-workspace/pdfs/$pdf.png
-	for png in $(ls -1 ./carrusel-workspace/pdfs/$pdf*.png); do
+for pdf in $(ls -1 $WORKSPACE/pdfs/); do
+	convert $WORKSPACE/pdfs/$pdf $WORKSPACE/pdfs/$pdf.png
+	for png in $(ls -1 $WORKSPACE/pdfs/$pdf*.png); do
 		NUMERO=$(echo $NUMERO+1|bc)
 		ffmpeg -f lavfi -i color=s=1440x900:d=100 -loop 1 -i $png -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mp4
 		rm $png
