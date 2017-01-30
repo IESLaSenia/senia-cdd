@@ -115,6 +115,7 @@ for doc in $(ls -1 $WORKSPACE/docs/); do
 		ffmpeg -f lavfi -i color=s=1440x900:d=100 -loop 1 -i $png -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mp4
 		#rm $png
 	done
+	rm -rf "$WORKSPACE/docs/$doc.d/"
 	
 
 done
