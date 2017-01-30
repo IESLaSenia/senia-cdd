@@ -1,10 +1,19 @@
 #!/bin/bash
 
+# Exit if no args 
+if [ $# -ne 2 ]; then
+	echo " * USAGE : $0 FOLDER NombreVideo.mp4"
+	exit 1
+fi
+
+
 # SETTINGS
 input_dir="$1"  # Replace this by a path to your folder /path/to/your/folder
-n_files=10                        # Replace this by a number of images
-files=`ls ${input_dir}/*.jpg | head -${n_files}`  # Change the file type to the correct type of your images
-output_file="video.mp4"           # Name of output video
+# Quitamos los espacios a los nombres
+find $1 -name "* *" -type f | rename 's/ /_/g'
+files=$(find $1 -xtype f) # Change the file type to the correct type of your images
+n_files=$(echo $files| tr " " "\n"| wc -l)
+output_file="$2"           	  # Name of output video
 crossfade=0.9                     # Crossfade duration between two images
 #----------------------------------------------------------------
 
@@ -16,7 +25,7 @@ output="[0:v]"
 i=0
 
 for f in ${files}; do
-  input+=" -loop 1 -t 1 -i $f"
+  input+=" -loop 1 -t 1 -i \"$f\""
 
   next=$((i+1))
   if [ "${i}" -ne "$((n_files-1))" ]; then
