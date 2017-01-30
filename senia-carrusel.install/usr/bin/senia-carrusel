@@ -18,6 +18,14 @@ die(){
 	exit 1
 }
 
+
+#
+# Remove spaces
+#
+remove_spaces(){
+	find $1 -name "* *" -type f | rename 's/ /_/g'
+}
+
 #
 # Prepare environment function
 #
@@ -66,7 +74,7 @@ fi
 
 sanity_checks
 prepare_environment
-
+remove_spaces "$WORKSPACE"
 
 # Procesando los enlaces en primer lugar
 #
