@@ -91,7 +91,7 @@ done
 echo " * [ Photos ] : Working with photos"
 for photo in $(ls -1 $WORKSPACE/photos/); do
 	NUMERO=$(echo $NUMERO+1|bc)
-	ffmpeg -f lavfi -i color=s=1440x900:d=100 -loop 1 -i $WORKSPACE/photos/$photo -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mp4
+	ffmpeg -f lavfi -i color=s=1440x900:d=100 -loop 1 -i "$WORKSPACE/photos/$photo" -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO.mp4
 
 done
 
