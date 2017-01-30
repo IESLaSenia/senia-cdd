@@ -1,3 +1,13 @@
+senia-cdd (0.9.5.3) xenial; urgency=high
+
+  * Fixed some "spaced" bugs
+  * Create new binary from GitHub to solve the photovideo
+    problem. Now use separated script.
+  * New mechanism to remove "temporal files" in video 
+    step creation.
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Mon, 30 Jan 2017 19:11:00 +0100
+
 senia-cdd (0.9.5.2) xenial; urgency=medium
 
   * Updated version with player and server
