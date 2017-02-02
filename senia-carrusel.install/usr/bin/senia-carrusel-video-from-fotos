@@ -37,9 +37,10 @@ for f in ${files}; do
   fi
 
   i=$((i+1))
+  echo $f
 done
 
-output+="concat=n=$((i * 2 - 1)):v=1:a=0,format=yuv420p[v]\" -map \"[v]\" ${output_file}"
+output+="concat=n=$((i * 2 - 1)):v=1:a=0,format=yuva422p10le[v]\" -map \"[v]\" ${output_file}"
 
 script="ffmpeg ${input} -filter_complex \"${filters} ${output}"
 
