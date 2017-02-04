@@ -1,3 +1,11 @@
+senia-cdd (0.9.5.4) xenial; urgency=medium
+
+  * Fixed some bugs
+  * Added new binary
+  * Trying to be more expeditive.
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Sat, 04 Feb 2017 15:34:06 +0100
+
 senia-cdd (0.9.5.3) xenial; urgency=high
 
   * Fixed some "spaced" bugs
