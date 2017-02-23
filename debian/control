@@ -63,3 +63,9 @@ Architecture:all
 Depends: openssh-server, inkscape, vlc
 Description: Senia Dependences
  Some packages  to group dependences
+
+Package: senia-startup-conf
+Architecture:all
+Depends: unattended-upgrades
+Description: Senia APT and StartUp configuration
+ Senia APT upgrades

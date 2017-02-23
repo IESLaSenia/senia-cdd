@@ -1,3 +1,10 @@
+senia-cdd (0.9.9) xenial; urgency=high
+
+  * Updated with APT configuration for unattended
+    upgrades. 
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Thu, 23 Feb 2017 22:17:44 +0100
+
 senia-cdd (0.9.8) xenial; urgency=high
 
   * Updated background to Klee 
