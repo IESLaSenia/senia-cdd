@@ -6,6 +6,10 @@ if [ $# -ne 2 ]; then
 	exit 1
 fi
 
+mencoder mf://$1/*.jpg -mf w=1280:h=1024:fps=25:type=png -ovc raw -oac copy -o $2
+
+
+exit 1
 
 # SETTINGS
 input_dir="$1"  # Replace this by a path to your folder /path/to/your/folder
@@ -19,7 +23,7 @@ crossfade=0.9                     # Crossfade duration between two images
 
 # Making an ffmpeg script...
 input=""
-filters=""
+filters=" \"color=red:s=1280x720\" "
 output="[0:v]"
 
 i=0
