@@ -1,3 +1,9 @@
+senia-cdd (0.9.8) xenial; urgency=high
+
+  * Updated background to Klee 
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Thu, 23 Feb 2017 11:42:27 +0100
+
 senia-cdd (0.9.7) xenial; urgency=high
 
   * Removed diversions 
