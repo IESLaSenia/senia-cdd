@@ -32,8 +32,9 @@ case "$1" in
   configure)
     # Set up our config for dconf
 	for f in $FILES_TO_DIVERT ; do 
-	dpkg-divert --package senia-session-cleaner-for-mate --rename --quiet --add --divert $f.real $f 
-done
+		#dpkg-divert --package senia-session-cleaner-for-mate --rename --quiet --add --divert $f.real $f 
+		echo "[ * Senia Diversion * ]" 
+	done
   ;;
 
   abort-upgrade|abort-remove|abort-deconfigure)
