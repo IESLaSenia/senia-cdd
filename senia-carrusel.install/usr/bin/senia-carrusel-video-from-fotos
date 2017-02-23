@@ -13,9 +13,25 @@ exit 1
 
 # SETTINGS
 input_dir="$1"  # Replace this by a path to your folder /path/to/your/folder
+
 # Quitamos los espacios a los nombres
 find $1 -name "* *" -type f | rename 's/ /_/g'
-files=$(find $1 -xtype f) # Change the file type to the correct type of your images
+
+# Cambiamos el tamanyo a todas las fotos
+senia-carrusel-resize-imgs $input_dir
+
+# Creamos el video
+ffmpeg -y -framerate 1/5 -pattern_type glob -i "$input_dir-resized/*.png" -c:v libx264 -pix_fmt yuv420p $2
+
+# Salimos del script
+echo " * Finished before the previous tasks"
+exit 0
+
+# 
+
+# Esta parte ha sido comentada
+# a la espera de hacer mas pruebas
+files=$(find $input_dir-resized -xtype f) # Change the file type to the correct type of your images
 n_files=$(echo $files| tr " " "\n"| wc -l)
 output_file="$2"           	  # Name of output video
 crossfade=0.9                     # Crossfade duration between two images

@@ -26,7 +26,7 @@ Description: Senia-cdd settings for browsers
 
 Package: senia-cdd
 Architecture: all
-Depends: ${misc:Depends},senia-backgrounds, senia-session-cleaner-for-mate, senia-browsers-settings, senia-firstboot
+Depends: ${misc:Depends},senia-backgrounds, senia-session-cleaner-for-mate, senia-browsers-settings, senia-firstboot, senia-dependences
 Description: IES La Senia CDD
  All the stuff
 
@@ -57,3 +57,9 @@ Depends: ffmpeg, gnome-web-photo
 Description: Senia Carrusel to make videos
  Some stuff to solve the Senia problem
  with Videos and TV
+ 
+Package: senia-dependences
+Architecture:all
+Depends: openssh-server, inkscape, vlc
+Description: Senia Dependences
+ Some packages  to group dependences
