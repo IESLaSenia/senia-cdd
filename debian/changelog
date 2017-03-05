@@ -1,3 +1,11 @@
+senia-cdd (0.9.9.4) xenial; urgency=medium
+
+  * Updated Firefox Settings - now 
+    https://moodle.ieslasenia.org/ is the third page
+    on the beginning
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Sun, 05 Mar 2017 19:34:25 +0100
+
 senia-cdd (0.9.9.3) xenial; urgency=high
 
   * New Firefox settings 
