@@ -19,7 +19,8 @@ case $1 in
                 fi
 
 		# Cleaning firefox profiles
-		find /home/ -name ".mozilla" -exec rm -rf {} \; || true 
+		find /home/alumno/ -name ".mozilla" -exec rm -rf {} \; || true 
+		find /home/profe/ -name ".mozilla" -exec rm -rf {} \; || true 
         ;;
 
         abort-upgrade|abort-remove|abort-deconfigure)

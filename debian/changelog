@@ -1,3 +1,10 @@
+senia-cdd (0.9.9.5) xenial; urgency=high
+
+  * Updated postinst to not clean conserjeria
+    and only clean alumno and profe 
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Tue, 07 Mar 2017 10:33:52 +0100
+
 senia-cdd (0.9.9.4) xenial; urgency=medium
 
   * Updated Firefox Settings - now 
