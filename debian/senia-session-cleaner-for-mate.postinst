@@ -27,14 +27,18 @@ set -e
 
 FILES_TO_DIVERT="/usr/share/xsessions/gnome-flashback-compiz.desktop /usr/share/xsessions/gnome-flashback-metacity.desktop /usr/share/xsessions/ubuntu.desktop"
 
+FILES_TO_DIVERT="/usr/share/glib-2.0/schemas/10_unity-settings-daemon.gschema.override"
+
 case "$1" in
 
   configure)
     # Set up our config for dconf
 	for f in $FILES_TO_DIVERT ; do 
-		#dpkg-divert --package senia-session-cleaner-for-mate --rename --quiet --add --divert $f.real $f 
-		echo "[ * Senia Diversion * ]" 
+		dpkg-divert --package senia-session-cleaner-for-mate --rename --quiet --add --divert $f.real $f 
+		echo " * [ Senia Diversion ] : $f"
+		ln -sf $f.senia $f 
 	done
+	glib-compile-schemas /usr/share/glib-2.0/schemas/ || true
   ;;
 
   abort-upgrade|abort-remove|abort-deconfigure)

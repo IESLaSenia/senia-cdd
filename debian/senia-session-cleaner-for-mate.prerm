@@ -25,7 +25,10 @@ set -e
 #  . /usr/share/dbconfig-common/dpkg/postinst.pgsql
 #fi
 
-FILES_TO_DIVERT="/usr/share/xsessions/gnome-flashback-compiz.desktop /usr/share/xsessions/gnome-flashback-metacity.desktop /usr/share/xsessions/ubuntu.desktop"
+#FILES_TO_DIVERT="/usr/share/xsessions/gnome-flashback-compiz.desktop /usr/share/xsessions/gnome-flashback-metacity.desktop /usr/share/xsessions/ubuntu.desktop"
+
+
+FILES_TO_DIVERT="/usr/share/glib-2.0/schemas/10_unity-settings-daemon.gschema.override"
 
 case $1 in 
         remove|purge|abort-install|disappear)
@@ -34,6 +37,7 @@ case $1 in
 		        dpkg-divert --package senia-session-cleaner-for-mate --rename --quiet --remove $f 
 		done
               
+		glib-compile-schemas /usr/share/glib-2.0/schemas/ || true
                 ;;
         *)
                 echo "Nothing to do"
