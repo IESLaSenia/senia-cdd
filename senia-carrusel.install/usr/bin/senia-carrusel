@@ -7,7 +7,7 @@
 
 # Some usefull variables
 TMPDIR="/tmp/senia-carrusel.default"
-WORKSPACE="$HOME/carrusel-workspace"
+WORKSPACE="$HOME/senia-carrusel-workspace"
 NUMERO=0
 
 #
@@ -34,7 +34,9 @@ prepare_environment(){
 	echo " * [ Starting ]: Working with: $TMPDIR"
 }
 
-
+#
+# Cleaning  environment after ends
+#
 cleaning_environment(){
 	DEST=$(date +%F_%H_%m_%S)
         DEST=$(echo $WORKSPACE/"videos-$DEST")
@@ -44,7 +46,6 @@ cleaning_environment(){
 	find $TMPDIR -name "*.mp4" -exec mv {} $DEST \;
 	echo " * [ Cleaning ] : $TMPDIR is removed"
 	zenity --notification --text="Tarea finalizada en $DEST"
-	
 }
 
 #
@@ -81,7 +82,6 @@ remove_spaces "$WORKSPACE"
 NUMERO="0"
 if [ -z "$WORKSPACE/enlaces.txt" ] ; then
 	die "Fichero vacio"
-
 fi
 
 for line in $(cat $WORKSPACE/enlaces.txt); do
@@ -96,11 +96,15 @@ done
 
 #
 # Procesamos las fotos
-echo " * [ Photos ] : Working with photos"
 
-NUMERO=$(echo $NUMERO+1|bc)
-senia-carrusel-video-from-fotos $WORKSPACE/photos/ $TMPDIR/$NUMERO-photos.mp4
-
+# Test si hay fotos
+if [ "$(ls -A $WORKSPACE/photos/)" ]; then
+	echo " * [ Photos ] : Working with photos"
+	NUMERO=$(echo $NUMERO+1|bc)
+	senia-carrusel-video-from-fotos $WORKSPACE/photos/ $TMPDIR/$NUMERO-photos.mp4
+else
+    echo " * [ Photos ] : Vacio -> $WORKSPACE/photos"
+fi
 
 #
 # Procesamos los pdfs
@@ -108,16 +112,28 @@ echo " * [ DOCS ] : Working with docs"
 
 for doc in $(ls -1 $WORKSPACE/docs/); do
 	mkdir -p $WORKSPACE/docs/$doc.d/
+	
+	# Pasamos el pdf a pngs
 	soffice --headless --convert-to png $WORKSPACE/docs/$doc --outdir $WORKSPACE/docs/$doc.d/
-	#soffice --headless --convert-to png:"draw_png_export" --outdir $WORKSPACE/docs/$doc.d/ $WORKSPACE/docs/$doc 
+	
+	# Recorremos los diferentes pngs para crear los videos
 	for png in $(ls -1 $WORKSPACE/docs/$doc.d/*.png); do
+		
 		NUMERO=$(echo $NUMERO+1|bc)
+		
+		# Cambiamos el fondo a las imagenes con fondo transparente
+		convert $png -background white -alpha remove -flatten -alpha off $png-white.png
+		# Borramos la original
+		mv $png-white.png $png
+		
+		# Creamos el video
 		ffmpeg -y -f lavfi -i color=s=1440x900:d=100 -loop 1 -i $png -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO-docs.mp4
-		#rm $png
+	
 	done
+	
+	# Limpiamos el directorio
 	rm -rf "$WORKSPACE/docs/$doc.d/"
 	
-
 done
 
 #
@@ -125,17 +141,27 @@ done
 echo " * [ PDFS ] : Working with PDFs"
 
 for pdf in $(ls -1 $WORKSPACE/pdfs/); do
+
 	convert $WORKSPACE/pdfs/$pdf $WORKSPACE/pdfs/$pdf.png
+
 	for png in $(ls -1 $WORKSPACE/pdfs/$pdf*.png); do
+		
 		NUMERO=$(echo $NUMERO+1|bc)
-		ffmpeg -y -f lavfi -i color=s=1440x900:d=100 -loop 1 -i $png -filter_complex "[1:v]scale=1440:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO-pdf.mp4
+		
+		# Cambiamos el fondo a las imagenes con fondo transparente
+		convert $png -background white -alpha remove $png-white.png
+		# Borramos la original
+		mv $png-white.png $png
+		# Creamos el video
+		ffmpeg -y -f lavfi -i color=s=1920x1080:d=100 -loop 1 -i $png -filter_complex "[1:v]scale=1920:-1[fg];  [0:v][fg]overlay=y=-'t*h*0.01':shortest=1[v]" -map "[v]" $TMPDIR/$NUMERO-pdf.mp4
+
 		rm $png
+
 	done
 	
 
 done
 
-#soffice --headless --convert-to-png myfile.odg 
 
 cleaning_environment
 

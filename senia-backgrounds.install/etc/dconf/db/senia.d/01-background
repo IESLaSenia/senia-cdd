@@ -1,5 +1,5 @@
 [org/mate/desktop/background]
-picture-filename='/opt/senia/pixmaps/backgrounds/seniabooks_1600x1200.png'
+picture-filename='/usr/share/senia/pixmaps/backgrounds/seniabooks_1600x1200.png'
 primary-color='000000'
 secondary-color='FFFFFF'
 show-desktop-icons=true

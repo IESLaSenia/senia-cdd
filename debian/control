@@ -2,7 +2,7 @@ Source: senia-cdd
 Section: metapackages
 Priority: extra
 Maintainer: Angel Berlanas Vicente <angel.berlanas@gmail.com>
-Build-Depends: debhelper (>=9), unzip,python3-dev,python-dev
+Build-Depends: debhelper (>=9), unzip, python3-dev, python-dev, dh-python
 Standards-Version: 3.9.7
 
 Package: senia-backgrounds
@@ -32,13 +32,13 @@ Description: IES La Senia CDD
 
 Package: senia-non-essential-tools
 Architecture: all
-Depends: ${misc:Depends},${python:Depends},vim, python3-xlrd,python-opencv,python3-pyside.qtgui, python3-pyside.qtcore, python-pil
+Depends: ${misc:Depends},${python:Depends}, ${python3:Depends}, python3-xlrd,python-opencv,python3-pyside.qtgui, python3-pyside.qtcore, python-pil
 Description: But highly recommended
  IES La Senia development packages and tools packages
 
 Package: senia-firstboot
 Architecture: all
-Depends: ${misc:Depends},${python:Depends}, nagios-nrpe-server, ocsinventory-agent
+Depends: ${misc:Depends}, nagios-nrpe-server, ocsinventory-agent
 Recommends: vim
 Description: Senia Firstboot for cloned systems
  Firstboot script made by David and Fons to solve 
@@ -46,26 +46,26 @@ Description: Senia Firstboot for cloned systems
 
 Package: senia-nagios-plugins
 Architecture:all
-Depends: nagios-nrpe-server
-Description: Senia Nagios Plugins
+Depends: ${misc:Depends},nagios-nrpe-server
+Description: Senia plugins for Nagios
  Some nagios plugins to solve Senia 
  Monitoring
 
 Package: senia-carrusel
 Architecture:all
-Depends: ffmpeg, gnome-web-photo
-Description: Senia Carrusel to make videos
+Depends: ${misc:Depends},ffmpeg, gnome-web-photo, mencoder
+Description: Senia package for carrusel
  Some stuff to solve the Senia problem
  with Videos and TV
  
 Package: senia-dependences
 Architecture:all
-Depends: openssh-server, inkscape, vlc
-Description: Senia Dependences
+Depends: ${misc:Depends},openssh-server, inkscape, vlc, vim
+Description: Senia Metapackage of dependences
  Some packages  to group dependences
 
 Package: senia-startup-conf
 Architecture:all
-Depends: unattended-upgrades
+Depends: ${misc:Depends},unattended-upgrades
 Description: Senia APT and StartUp configuration
  Senia APT upgrades

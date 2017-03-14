@@ -1,3 +1,13 @@
+senia-cdd (0.9.9.6) xenial; urgency=high
+
+  * Updated senia-carrusel:
+    - Removed transparent background
+    - Less errors in empty folders
+  * Fixed a lot of lintian errors
+  * New path for backgrounds
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Tue, 14 Mar 2017 07:53:31 +0100
+
 senia-cdd (0.9.9.5) xenial; urgency=high
 
   * Updated postinst to not clean conserjeria
