@@ -1,3 +1,9 @@
+senia-cdd (0.9.9.9) xenial; urgency=high
+
+  * Updated dependences
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Tue, 14 Mar 2017 14:18:13 +0100
+
 senia-cdd (0.9.9.8) xenial; urgency=medium
 
   * Testing version Again
