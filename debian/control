@@ -69,3 +69,9 @@ Architecture:all
 Depends: ${misc:Depends},unattended-upgrades
 Description: Senia APT and StartUp configuration
  Senia APT upgrades
+
+Package: senia-appinventor
+Architecture:all
+Depends: ${misc:Depends}
+Description: Senia package for AppInventor 
+ and StartUp configuration
