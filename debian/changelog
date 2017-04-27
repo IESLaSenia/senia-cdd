@@ -1,3 +1,10 @@
+senia-cdd (1.0.2) xenial; urgency=high
+
+  * New package - senia-networking to be more 
+    clean with network configuration
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Thu, 27 Apr 2017 07:23:17 +0200
+
 senia-cdd (1.0.1) xenial; urgency=medium
 
   * Added desktop
