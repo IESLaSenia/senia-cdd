@@ -26,7 +26,7 @@ Description: Senia-cdd settings for browsers
 
 Package: senia-cdd
 Architecture: all
-Depends: ${misc:Depends},senia-backgrounds, senia-session-cleaner-for-mate, senia-browsers-settings, senia-firstboot, senia-dependences
+Depends: ${misc:Depends},senia-backgrounds, senia-session-cleaner-for-mate, senia-browsers-settings, senia-firstboot, senia-dependences, senia-networking
 Description: IES La Senia CDD
  All the stuff
 
@@ -75,3 +75,9 @@ Architecture:all
 Depends: ${misc:Depends}
 Description: Senia package for AppInventor 
  and StartUp configuration
+
+Package: senia-networking
+Architecture: all
+Depends: ${misc:Depends}, ethtool
+Description: Senia package for Networking 
+ and WakeOnLan
