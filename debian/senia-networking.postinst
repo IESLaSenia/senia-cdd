@@ -28,7 +28,7 @@ set -e
 case "$1" in
 
   configure)
-	! -f /etc/network/if-up.d/wake-up || chmod +x /etc/network/if-up.d/wake-up	
+	! test -f /etc/network/if-up.d/wake-up || chmod +x /etc/network/if-up.d/wake-up	
   ;;
 
   abort-upgrade|abort-remove|abort-deconfigure)
