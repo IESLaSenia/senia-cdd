@@ -81,3 +81,9 @@ Architecture: all
 Depends: ${misc:Depends}, ethtool
 Description: Senia package for Networking 
  and WakeOnLan
+
+Package: senia-profes-only
+Architecture: all
+Depends: ${misc:Depends}
+Description: Senia configuration for only-teachers
+ computers and so on
