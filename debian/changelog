@@ -1,3 +1,9 @@
+senia-cdd (1.0.5) xenial; urgency=high
+
+  * Created package for only-teachers computers 
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Fri, 05 May 2017 10:42:17 +0200
+
 senia-cdd (1.0.4) xenial; urgency=high
 
   * Updated background
