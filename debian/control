@@ -60,7 +60,7 @@ Description: Senia package for carrusel
  
 Package: senia-dependences
 Architecture:all
-Depends: ${misc:Depends},openssh-server, inkscape, vlc, vim
+Depends: ${misc:Depends},openssh-server, inkscape, vlc, vim, screen
 Description: Senia Metapackage of dependences
  Some packages  to group dependences
 
