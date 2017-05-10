@@ -26,7 +26,7 @@ Description: Senia-cdd settings for browsers
 
 Package: senia-cdd
 Architecture: all
-Depends: ${misc:Depends},senia-backgrounds, senia-session-cleaner-for-mate, senia-browsers-settings, senia-firstboot, senia-dependences, senia-networking
+Depends: ${misc:Depends},senia-backgrounds, senia-session-cleaner-for-mate, senia-browsers-settings, senia-firstboot, senia-dependences, senia-networking, senia-languages
 Description: IES La Senia CDD
  All the stuff
 
@@ -81,6 +81,12 @@ Architecture: all
 Depends: ${misc:Depends}, ethtool
 Description: Senia package for Networking 
  and WakeOnLan
+
+Package: senia-languages
+Architecture: all
+Depends: ${misc:Depends}, language-pack-gnome-ca, libreoffice-l10n-ca, libreoffice-help-ca, language-pack-gnome-ca-base, language-pack-gnome-ca, language-pack-ca-base, language-pack-ca, firefox-locale-ca
+Description: Senia languages meta
+ Some languages
 
 Package: senia-profes-only
 Architecture: all
