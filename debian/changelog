@@ -1,3 +1,10 @@
+senia-cdd (1.0.8) xenial; urgency=high
+
+  * New dependence
+  * New Logo
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Tue, 16 May 2017 18:58:30 +0200
+
 senia-cdd (1.0.7) xenial; urgency=high
 
   * With Catalan 
