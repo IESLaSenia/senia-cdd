@@ -5,3 +5,4 @@ iface _@_IFACE_@_ inet static
 	netmask _@_MYMASK_@_
 	gateway _@_MYGW_@_
 	dns-nameservers 8.8.8.8 8.8.4.4
+	up ethtool -s _@_IFACE_@_ wol g

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+SYSTEM_TLP="/etc/default/tlp"
+SYSTEM_HALT="/etc/default/halt"
+
+
+## MAIN 
+
+
+
+exit 0

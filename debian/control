@@ -1,7 +1,7 @@
 Source: senia-cdd
 Section: metapackages
 Priority: extra
-Maintainer: Angel Berlanas Vicente <angel.berlanas@gmail.com>
+Maintainer: ticsenia <tic@ieslasenia.org>
 Build-Depends: debhelper (>=9), unzip, python3-dev, python-dev, dh-python
 Standards-Version: 3.9.7
 

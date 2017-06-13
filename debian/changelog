@@ -1,3 +1,11 @@
+senia-cdd (2.0) xenial; urgency=high
+
+  [ ticsenia ]
+  * First release for senia instead of aberlanas :-(
+  * Added wakeonlan technology
+
+ -- ticsenia <tic@ieslasenia.org>  Tue, 13 Jun 2017 10:31:48 +0200
+
 senia-cdd (1.0.8) xenial; urgency=high
 
   * New dependence
